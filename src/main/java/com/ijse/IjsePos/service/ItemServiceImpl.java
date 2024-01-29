@@ -20,12 +20,12 @@ public class ItemServiceImpl implements ItemService {
     private CategoryRepository categoryRepository;
 
     @Override
-    public List<Item> getAllProducts() {
+    public List<Item> getAllItems() {
         return itemRepository.findAll();
     }
 
     @Override
-    public Item createProduct(ItemDTO itemDTO) {
+    public Item createItem(ItemDTO itemDTO) {
         Category category = categoryRepository.findById(itemDTO.getCategoryId()).orElse(null);
 
         if (category != null){
@@ -54,12 +54,12 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public Item getProductsBy(Long id) {
+    public Item getItemById(Long id) {
         return itemRepository.findById(id).orElse(null);
     }
 
     @Override
-    public List<Item> getProductsByCategory(Long id) {
+    public List<Item> getItemByCategory(Long id) {
         Category category = categoryRepository.findById(id).orElse(null);
 
         if (category != null){

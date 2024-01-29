@@ -8,9 +8,9 @@ import java.util.List;
 
 @Service
 public interface ItemService {
-    List<Item> getAllProducts();
-    Item createProduct(ItemDTO itemDTO);
+    List<Item> getAllItems();
+    Item createItem(ItemDTO itemDTO);
     Item updateItem(Long id, Item item);
-    Item getProductsBy(Long id);
-    List<Item> getProductsByCategory(Long id);
+    Item getItemById(Long id);
+    List<Item> getItemByCategory(Long id);
 }
