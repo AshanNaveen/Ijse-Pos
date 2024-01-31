@@ -29,17 +29,22 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             String jwt = parseJwt(request);
 
             if (jwt != null && jwtUtils.validateJwtToken(jwt)){
+
                 String username=jwtUtils.getUsernameFromJwtToken(jwt);
 
                 UserDetails userDetails = userDetailService.loadUserByUsername(username);
+
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
+
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }catch (Exception e){
-
+            System.err.println("User can't Authorized");
         }
+
+        filterChain.doFilter(request,response);
     }
 
     private  String parseJwt(HttpServletRequest request){

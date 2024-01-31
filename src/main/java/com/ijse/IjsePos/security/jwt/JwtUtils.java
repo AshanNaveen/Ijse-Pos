@@ -22,7 +22,7 @@ public class JwtUtils {
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
     }
 
-    public  String generateTwtToken(Authentication authentication){
+    public  String generateJwtToken(Authentication authentication){
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
@@ -49,6 +49,6 @@ public class JwtUtils {
     }
 
     public String getUsernameFromJwtToken(String authToken){
-        return Jwts.parserBuilder().setSigningKey(key()).build().parseClaimsJwt(authToken).getBody().getSubject();
+        return Jwts.parserBuilder().setSigningKey(key()).build().parseClaimsJws(authToken).getBody().getSubject();
     }
 }
